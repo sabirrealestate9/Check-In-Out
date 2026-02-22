@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Drive - Sabir Amin Real Estate</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1 class="logo">Sabir Amin Real Estate</h1>
+                <p style="color: rgba(255,255,255,0.6); font-size: 0.75rem;">LLC SPC</p>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                    Dashboard
+                </a>
+                <a href="checklist.html" class="nav-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 11l3 3L22 4"></path>
+                        <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
+                    </svg>
+                    Check-In/Out
+                </a>
+                <a href="tenants.html" class="nav-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 00-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 010 7.75"></path>
+                    </svg>
+                    Tenants
+                </a>
+                <a href="studios.html" class="nav-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                    Studios
+                </a>
+                <a href="drive.html" class="nav-item active">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"></path>
+                    </svg>
+                    Google Drive
+                </a>
+                <a href="policies.html" class="nav-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                    </svg>
+                    Policies
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="#" class="nav-item" onclick="Auth.logout(); return false;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                    Logout
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <button class="menu-toggle" id="menuToggle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+                <h2 class="header-title">Google Drive</h2>
+                <div class="header-actions">
+                    <button class="btn btn-primary" onclick="syncStudios()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 6px;">
+                            <polyline points="23 4 23 10 17 10"></polyline>
+                            <path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"></path>
+                        </svg>
+                        Sync Studios
+                    </button>
+                </div>
+            </header>
+
+            <!-- Content -->
+            <div class="content">
+                <!-- Breadcrumbs -->
+                <div class="breadcrumbs" id="breadcrumbs">
+                    <span class="breadcrumb-item" onclick="goToRoot()">Drive</span>
+                </div>
+
+                <!-- Loading State -->
+                <div id="loadingState" class="loading-container" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Loading Google Drive...</p>
+                </div>
+
+                <!-- Folder View -->
+                <div id="folderView" class="folders-grid"></div>
+
+                <!-- Folder Contents View -->
+                <div id="contentsView" style="display: none;">
+                    <div class="search-bar" style="margin-bottom: 1.5rem;">
+                        <input type="text" class="search-input" id="fileSearch" placeholder="Search files...">
+                    </div>
+                    <div class="card" style="padding: 0;">
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Size</th>
+                                        <th>Modified</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="filesTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script type="module">
+        import { Auth } from '../js/auth.js';
+        import { App } from '../js/app.js';
+        import { CONFIG } from '../js/config.js';
+
+        // Make Auth available globally for onclick handlers
+        window.Auth = Auth;
+
+        // State
+        let currentFolderId = null;
+        let breadcrumbs = [{ id: 'root', name: 'Drive' }];
+        let studios = [];
+        let currentFiles = [];
+
+        // Check authentication
+        if (!Auth.isAuthenticated()) {
+            window.location.href = '../index.html';
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadStudios();
+            setupEventListeners();
+        });
+
+        function setupEventListeners() {
+            // Mobile menu toggle
+            document.getElementById('menuToggle').addEventListener('click', () => {
+                document.getElementById('sidebar').classList.toggle('active');
+            });
+
+            // File search
+            document.getElementById('fileSearch').addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase();
+                filterFiles(query);
+            });
+        }
+
+        async function loadStudios() {
+            showLoading(true);
+            try {
+                const response = await Auth.api(`${CONFIG.API_URL}/studios`);
+                studios = response.data || [];
+                renderStudios();
+            } catch (error) {
+                App.showToast('Failed to load studios', 'error');
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        function renderStudios() {
+            const container = document.getElementById('folderView');
+            document.getElementById('contentsView').style.display = 'none';
+            container.style.display = 'grid';
+
+            if (studios.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1/-1;">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" style="margin-bottom: 1rem; opacity: 0.5;">
+                            <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"></path>
+                        </svg>
+                        <h3>No Studios Found</h3>
+                        <p>Add studios to sync them with Google Drive</p>
+                        <a href="studios.html" class="btn btn-primary" style="margin-top: 1rem;">Add Studio</a>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = studios.map(studio => `
+                <div class="folder-card" onclick="openStudioFolder('${studio.id}', '${studio.name}', '${studio.driveFolderId || ''}')">
+                    <div class="folder-icon">📁</div>
+                    <div class="folder-name">${studio.name}</div>
+                    <div class="folder-meta">${studio.driveFolderId ? 'Synced' : 'Not synced'}</div>
+                </div>
+            `).join('');
+        }
+
+        async function openStudioFolder(studioId, studioName, driveFolderId) {
+            if (!driveFolderId) {
+                App.showToast('Studio not synced with Google Drive. Click Sync Studios to create folder.', 'warning');
+                return;
+            }
+
+            currentFolderId = driveFolderId;
+            breadcrumbs = [{ id: 'root', name: 'Drive' }, { id: driveFolderId, name: studioName }];
+            updateBreadcrumbs();
+
+            showLoading(true);
+            try {
+                const response = await Auth.api(`${CONFIG.API_URL}/drive/folders/${driveFolderId}/files`);
+                currentFiles = response.files || [];
+                renderFolderContents();
+            } catch (error) {
+                App.showToast('Failed to load folder contents', 'error');
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        function renderFolderContents() {
+            document.getElementById('folderView').style.display = 'none';
+            document.getElementById('contentsView').style.display = 'block';
+
+            const tbody = document.getElementById('filesTableBody');
+            
+            if (currentFiles.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="5" style="text-align: center; padding: 3rem;">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" style="opacity: 0.5; margin-bottom: 1rem;">
+                                <path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"></path>
+                                <polyline points="13 2 13 9 20 9"></polyline>
+                            </svg>
+                            <p>No files in this folder</p>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = currentFiles.map(file => `
+                <tr>
+                    <td>
+                        <span style="margin-right: 8px;">${getFileIcon(file.mimeType)}</span>
+                        ${file.name}
+                    </td>
+                    <td>${getFileType(file.mimeType)}</td>
+                    <td>${formatFileSize(file.size)}</td>
+                    <td>${App.formatDate(file.modifiedTime)}</td>
+                    <td>
+                        <a href="${file.webViewLink}" target="_blank" class="btn btn-secondary" style="padding: 6px 12px; font-size: 0.75rem;">
+                            Open
+                        </a>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function filterFiles(query) {
+            const filtered = currentFiles.filter(file => 
+                file.name.toLowerCase().includes(query)
+            );
+            
+            const tbody = document.getElementById('filesTableBody');
+            
+            if (filtered.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="5" style="text-align: center; padding: 2rem;">
+                            No files match your search
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = filtered.map(file => `
+                <tr>
+                    <td>
+                        <span style="margin-right: 8px;">${getFileIcon(file.mimeType)}</span>
+                        ${file.name}
+                    </td>
+                    <td>${getFileType(file.mimeType)}</td>
+                    <td>${formatFileSize(file.size)}</td>
+                    <td>${App.formatDate(file.modifiedTime)}</td>
+                    <td>
+                        <a href="${file.webViewLink}" target="_blank" class="btn btn-secondary" style="padding: 6px 12px; font-size: 0.75rem;">
+                            Open
+                        </a>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function getFileIcon(mimeType) {
+            if (mimeType.includes('folder')) return '📁';
+            if (mimeType.includes('pdf')) return '📄';
+            if (mimeType.includes('image')) return '🖼️';
+            if (mimeType.includes('video')) return '🎬';
+            if (mimeType.includes('audio')) return '🎵';
+            if (mimeType.includes('spreadsheet') || mimeType.includes('excel')) return '📊';
+            if (mimeType.includes('document') || mimeType.includes('word')) return '📝';
+            return '📎';
+        }
+
+        function getFileType(mimeType) {
+            if (mimeType.includes('folder')) return 'Folder';
+            if (mimeType.includes('pdf')) return 'PDF';
+            if (mimeType.includes('image')) return 'Image';
+            if (mimeType.includes('video')) return 'Video';
+            if (mimeType.includes('audio')) return 'Audio';
+            if (mimeType.includes('spreadsheet') || mimeType.includes('excel')) return 'Spreadsheet';
+            if (mimeType.includes('document') || mimeType.includes('word')) return 'Document';
+            return 'File';
+        }
+
+        function formatFileSize(bytes) {
+            if (!bytes) return '-';
+            const sizes = ['B', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(1024));
+            return Math.round(bytes / Math.pow(1024, i) * 100) / 100 + ' ' + sizes[i];
+        }
+
+        function updateBreadcrumbs() {
+            const container = document.getElementById('breadcrumbs');
+            container.innerHTML = breadcrumbs.map((crumb, index) => {
+                if (index === breadcrumbs.length - 1) {
+                    return `<span class="breadcrumb-item active">${crumb.name}</span>`;
+                }
+                return `<span class="breadcrumb-item" onclick="navigateToBreadcrumb(${index})">${crumb.name}</span>`;
+            }).join('<span class="breadcrumb-separator">/</span>');
+        }
+
+        function goToRoot() {
+            breadcrumbs = [{ id: 'root', name: 'Drive' }];
+            updateBreadcrumbs();
+            renderStudios();
+        }
+
+        function navigateToBreadcrumb(index) {
+            breadcrumbs = breadcrumbs.slice(0, index + 1);
+            updateBreadcrumbs();
+            if (index === 0) {
+                renderStudios();
+            }
+        }
+
+        async function syncStudios() {
+            const btn = document.querySelector('.header-actions .btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<span class="spinner" style="width: 16px; height: 16px; border-width: 2px; display: inline-block; vertical-align: middle; margin-right: 6px;"></span> Syncing...';
+            btn.disabled = true;
+
+            try {
+                await Auth.api(`${CONFIG.API_URL}/drive/sync-studios`, { method: 'POST' });
+                App.showToast('Studios synced successfully with Google Drive', 'success');
+                loadStudios();
+            } catch (error) {
+                App.showToast('Failed to sync studios', 'error');
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        function showLoading(show) {
+            document.getElementById('loadingState').style.display = show ? 'flex' : 'none';
+        }
+
+        // Expose functions globally
+        window.openStudioFolder = openStudioFolder;
+        window.goToRoot = goToRoot;
+        window.navigateToBreadcrumb = navigateToBreadcrumb;
+        window.syncStudios = syncStudios;
+    </script>
+</body>
+</html>

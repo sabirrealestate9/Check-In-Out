@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tenant Details - Sabir Amin Real Estate</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1 class="logo">Sabir Amin Real Estate</h1>
+                <p style="color: rgba(255,255,255,0.6); font-size: 0.75rem;">LLC SPC</p>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                    Dashboard
+                </a>
+                <a href="checklist.html" class="nav-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 11l3 3L22 4"></path>
+                        <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
+                    </svg>
+                    Check-In/Out
+                </a>
+                <a href="tenants.html" class="nav-item active">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 00-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 010 7.75"></path>
+                    </svg>
+                    Tenants
+                </a>
+                <a href="studios.html" class="nav-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                    Studios
+                </a>
+                <a href="drive.html" class="nav-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"></path>
+                    </svg>
+                    Google Drive
+                </a>
+                <a href="policies.html" class="nav-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                    </svg>
+                    Policies
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="#" class="nav-item" onclick="Auth.logout(); return false;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                    Logout
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <button class="menu-toggle" id="menuToggle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+                <h2 class="header-title">Tenant Details</h2>
+                <div class="header-actions">
+                    <a href="checklist.html?tenant=${tenantId}" class="btn btn-primary" id="newChecklistBtn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 6px;">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        New Checklist
+                    </a>
+                </div>
+            </header>
+
+            <!-- Content -->
+            <div class="content">
+                <!-- Loading State -->
+                <div id="loadingState" class="loading-container">
+                    <div class="spinner"></div>
+                    <p>Loading tenant details...</p>
+                </div>
+
+                <!-- Tenant Info -->
+                <div id="tenantInfo" style="display: none;">
+                    <!-- Profile Card -->
+                    <div class="card" style="margin-bottom: 1.5rem;">
+                        <div style="display: flex; align-items: flex-start; gap: 1.5rem; flex-wrap: wrap;">
+                            <div class="tenant-avatar" id="tenantAvatar" style="width: 80px; height: 80px; font-size: 2rem;"></div>
+                            <div style="flex: 1; min-width: 250px;">
+                                <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+                                    <div>
+                                        <h2 id="tenantName" style="margin-bottom: 0.5rem;"></h2>
+                                        <p id="tenantStatus" style="margin-bottom: 0.5rem;"></p>
+                                        <p id="tenantStudio" style="color: var(--text-muted);"></p>
+                                    </div>
+                                    <div style="display: flex; gap: 0.5rem;">
+                                        <button class="btn btn-secondary" onclick="editTenant()">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 6px;">
+                                                <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"></path>
+                                                <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                            </svg>
+                                            Edit
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-2" style="margin-bottom: 1.5rem;">
+                        <!-- Contact Info -->
+                        <div class="card">
+                            <h3 style="margin-bottom: 1rem; font-size: 1.1rem;">Contact Information</h3>
+                            <div class="info-row">
+                                <span class="info-label">Email</span>
+                                <span class="info-value" id="tenantEmail"></span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Phone</span>
+                                <span class="info-value" id="tenantPhone"></span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Emergency Contact</span>
+                                <span class="info-value" id="tenantEmergency"></span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">ID/Passport</span>
+                                <span class="info-value" id="tenantIdNumber"></span>
+                            </div>
+                        </div>
+
+                        <!-- Lease Info -->
+                        <div class="card">
+                            <h3 style="margin-bottom: 1rem; font-size: 1.1rem;">Lease Information</h3>
+                            <div class="info-row">
+                                <span class="info-label">Check-In Date</span>
+                                <span class="info-value" id="tenantCheckIn"></span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Check-Out Date</span>
+                                <span class="info-value" id="tenantCheckOut"></span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Monthly Rent</span>
+                                <span class="info-value" id="tenantRent"></span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Security Deposit</span>
+                                <span class="info-value" id="tenantDeposit"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Notes -->
+                    <div class="card" style="margin-bottom: 1.5rem;">
+                        <h3 style="margin-bottom: 1rem; font-size: 1.1rem;">Notes</h3>
+                        <p id="tenantNotes" style="white-space: pre-wrap; line-height: 1.6;"></p>
+                    </div>
+
+                    <!-- Checklists History -->
+                    <div class="card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <h3 style="font-size: 1.1rem;">Checklist History</h3>
+                        </div>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Type</th>
+                                        <th>Studio</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="checklistsTableBody">
+                                    <tr>
+                                        <td colspan="5" style="text-align: center; padding: 2rem;">No checklists found</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Edit Tenant Modal -->
+    <div class="modal" id="editTenantModal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h3 class="modal-title">Edit Tenant</h3>
+                <button class="modal-close" onclick="closeEditModal()">&times;</button>
+            </div>
+            <form id="editTenantForm">
+                <div class="grid grid-2">
+                    <div class="form-group">
+                        <label class="form-label">Full Name *</label>
+                        <input type="text" class="form-input" id="editName" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email *</label>
+                        <input type="email" class="form-input" id="editEmail" required>
+                    </div>
+                </div>
+                <div class="grid grid-2">
+                    <div class="form-group">
+                        <label class="form-label">Phone</label>
+                        <input type="tel" class="form-input" id="editPhone">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Emergency Contact</label>
+                        <input type="text" class="form-input" id="editEmergency" placeholder="Name - Phone">
+                    </div>
+                </div>
+                <div class="grid grid-2">
+                    <div class="form-group">
+                        <label class="form-label">ID/Passport Number</label>
+                        <input type="text" class="form-input" id="editIdNumber">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Monthly Rent</label>
+                        <input type="number" class="form-input" id="editRent" step="0.01">
+                    </div>
+                </div>
+                <div class="grid grid-2">
+                    <div class="form-group">
+                        <label class="form-label">Check-In Date</label>
+                        <input type="date" class="form-input" id="editCheckIn">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Check-Out Date</label>
+                        <input type="date" class="form-input" id="editCheckOut">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Notes</label>
+                    <textarea class="form-textarea" id="editNotes" rows="3"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeEditModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script type="module">
+        import { Auth } from '../js/auth.js';
+        import { App } from '../js/app.js';
+        import { CONFIG } from '../js/config.js';
+
+        // Make Auth available globally
+        window.Auth = Auth;
+
+        // State
+        let tenant = null;
+        let tenantId = null;
+        let checklists = [];
+
+        // Check authentication
+        if (!Auth.isAuthenticated()) {
+            window.location.href = '../index.html';
+        }
+
+        // Get tenant ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        tenantId = urlParams.get('id');
+
+        if (!tenantId) {
+            window.location.href = 'tenants.html';
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadTenant();
+            setupEventListeners();
+        });
+
+        function setupEventListeners() {
+            // Mobile menu toggle
+            document.getElementById('menuToggle').addEventListener('click', () => {
+                document.getElementById('sidebar').classList.toggle('active');
+            });
+
+            // Form submission
+            document.getElementById('editTenantForm').addEventListener('submit', handleEditSubmit);
+        }
+
+        async function loadTenant() {
+            showLoading(true);
+            try {
+                const response = await Auth.api(`${CONFIG.API_URL}/tenants/${tenantId}`);
+                tenant = response.data;
+                renderTenant();
+                loadChecklists();
+            } catch (error) {
+                App.showToast('Failed to load tenant details', 'error');
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        async function loadChecklists() {
+            try {
+                const response = await Auth.api(`${CONFIG.API_URL}/checklists?tenantId=${tenantId}`);
+                checklists = response.data || [];
+                renderChecklists();
+            } catch (error) {
+                console.error('Failed to load checklists:', error);
+            }
+        }
+
+        function renderTenant() {
+            if (!tenant) return;
+
+            // Update header button
+            document.getElementById('newChecklistBtn').href = `checklist.html?tenant=${tenantId}`;
+
+            // Avatar
+            const initials = tenant.name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+            document.getElementById('tenantAvatar').textContent = initials;
+
+            // Basic info
+            document.getElementById('tenantName').textContent = tenant.name;
+            
+            const statusClass = tenant.status === 'active' ? 'badge-success' : 
+                               tenant.status === 'checked-out' ? 'badge-danger' : 'badge-warning';
+            document.getElementById('tenantStatus').innerHTML = `<span class="badge ${statusClass}">${formatStatus(tenant.status)}</span>`;
+            
+            document.getElementById('tenantStudio').textContent = tenant.studio ? `Studio: ${tenant.studio.name}` : 'No studio assigned';
+
+            // Contact info
+            document.getElementById('tenantEmail').textContent = tenant.email || 'N/A';
+            document.getElementById('tenantPhone').textContent = tenant.phone || 'N/A';
+            document.getElementById('tenantEmergency').textContent = tenant.emergencyContact || 'N/A';
+            document.getElementById('tenantIdNumber').textContent = tenant.idNumber || 'N/A';
+
+            // Lease info
+            document.getElementById('tenantCheckIn').textContent = tenant.checkInDate ? App.formatDate(tenant.checkInDate) : 'N/A';
+            document.getElementById('tenantCheckOut').textContent = tenant.checkOutDate ? App.formatDate(tenant.checkOutDate) : 'Not scheduled';
+            document.getElementById('tenantRent').textContent = tenant.monthlyRent ? `$${tenant.monthlyRent}` : 'N/A';
+            document.getElementById('tenantDeposit').textContent = tenant.securityDeposit ? `$${tenant.securityDeposit}` : 'N/A';
+
+            // Notes
+            document.getElementById('tenantNotes').textContent = tenant.notes || 'No notes available';
+
+            // Show content
+            document.getElementById('tenantInfo').style.display = 'block';
+        }
+
+        function renderChecklists() {
+            const tbody = document.getElementById('checklistsTableBody');
+            
+            if (checklists.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; padding: 2rem;">No checklists found</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = checklists.map(checklist => {
+                const typeClass = checklist.type === 'checkin' ? 'badge-success' : 'badge-danger';
+                return `
+                    <tr>
+                        <td>${App.formatDate(checklist.createdAt)}</td>
+                        <td><span class="badge ${typeClass}">${checklist.type === 'checkin' ? 'Check-In' : 'Check-Out'}</span></td>
+                        <td>${checklist.studio?.name || 'N/A'}</td>
+                        <td><span class="badge badge-success">Completed</span></td>
+                        <td>
+                            <a href="checklist.html?view=${checklist.id}" class="btn btn-secondary" style="padding: 6px 12px; font-size: 0.75rem;">View</a>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function formatStatus(status) {
+            const statuses = {
+                active: 'Active',
+                inactive: 'Inactive',
+                'checked-out': 'Checked Out',
+                pending: 'Pending'
+            };
+            return statuses[status] || status;
+        }
+
+        function editTenant() {
+            if (!tenant) return;
+
+            document.getElementById('editName').value = tenant.name;
+            document.getElementById('editEmail').value = tenant.email || '';
+            document.getElementById('editPhone').value = tenant.phone || '';
+            document.getElementById('editEmergency').value = tenant.emergencyContact || '';
+            document.getElementById('editIdNumber').value = tenant.idNumber || '';
+            document.getElementById('editRent').value = tenant.monthlyRent || '';
+            document.getElementById('editCheckIn').value = tenant.checkInDate ? tenant.checkInDate.split('T')[0] : '';
+            document.getElementById('editCheckOut').value = tenant.checkOutDate ? tenant.checkOutDate.split('T')[0] : '';
+            document.getElementById('editNotes').value = tenant.notes || '';
+
+            document.getElementById('editTenantModal').classList.add('active');
+        }
+
+        function closeEditModal() {
+            document.getElementById('editTenantModal').classList.remove('active');
+        }
+
+        async function handleEditSubmit(e) {
+            e.preventDefault();
+
+            const data = {
+                name: document.getElementById('editName').value,
+                email: document.getElementById('editEmail').value,
+                phone: document.getElementById('editPhone').value,
+                emergencyContact: document.getElementById('editEmergency').value,
+                idNumber: document.getElementById('editIdNumber').value,
+                monthlyRent: parseFloat(document.getElementById('editRent').value) || null,
+                checkInDate: document.getElementById('editCheckIn').value || null,
+                checkOutDate: document.getElementById('editCheckOut').value || null,
+                notes: document.getElementById('editNotes').value
+            };
+
+            try {
+                await Auth.api(`${CONFIG.API_URL}/tenants/${tenantId}`, {
+                    method: 'PUT',
+                    body: JSON.stringify(data)
+                });
+                App.showToast('Tenant updated successfully', 'success');
+                closeEditModal();
+                loadTenant();
+            } catch (error) {
+                App.showToast(error.message || 'Failed to update tenant', 'error');
+            }
+        }
+
+        function showLoading(show) {
+            document.getElementById('loadingState').style.display = show ? 'flex' : 'none';
+            if (!show) document.getElementById('tenantInfo').style.display = 'block';
+        }
+
+        // Expose functions globally
+        window.editTenant = editTenant;
+        window.closeEditModal = closeEditModal;
+    </script>
+</body>
+</html>

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Checklist - Sabir Amin Real Estate</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Mobile Header -->
+    <header class="mobile-header">
+        <div>
+            <h1 style="font-size: 1.125rem;">Sabir Amin</h1>
+            <p style="font-size: 0.75rem; color: var(--text-secondary);">Real Estate LLC SPC</p>
+        </div>
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+    </header>
+
+    <div class="app-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Sabir Amin</h2>
+                <p>Real Estate LLC SPC</p>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+                    Dashboard
+                </a>
+                <a href="tenants.html" class="nav-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    Tenants
+                </a>
+                <a href="studios.html" class="nav-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4 8 4v14"/><path d="M9 21v-6h6v6"/></svg>
+                    Studios
+                </a>
+                <a href="drive.html" class="nav-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/><path d="M12 11v6"/><path d="M9 14h6"/></svg>
+                    Google Drive
+                </a>
+                <a href="policies.html" class="nav-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    Policies
+                </a>
+            </nav>
+
+            <div class="sidebar-user">
+                <div class="user-menu" id="logoutBtn">
+                    <div class="user-avatar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </div>
+                    <div class="user-info">
+                        <p class="user-name">Loading...</p>
+                        <p class="user-role">Loading...</p>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <a href="tenants.html" class="btn btn-secondary" style="padding: 0.5rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                    </a>
+                    <div>
+                        <h1 id="pageTitle">Checklist</h1>
+                        <p>Complete the property condition checklist</p>
+                    </div>
+                </div>
+            </div>
+
+            <form id="checklistForm">
+                <!-- Tenant Selection -->
+                <div class="card">
+                    <h3 style="margin-bottom: 1rem;">Select Tenant</h3>
+                    <div class="form-group">
+                        <select id="tenantSelect" required>
+                            <option value="">Select a tenant...</option>
+                        </select>
+                    </div>
+                    <div id="tenantInfo" style="display: none; padding: 1rem; background: rgba(255,255,255,0.03); border-radius: 0.5rem; margin-top: 1rem;">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
+                            <div><p style="color: var(--text-secondary); font-size: 0.875rem;">Studio</p><p id="infoStudio">-</p></div>
+                            <div><p style="color: var(--text-secondary); font-size: 0.875rem;">Check-In</p><p id="infoCheckIn">-</p></div>
+                            <div><p style="color: var(--text-secondary); font-size: 0.875rem;">Check-Out</p><p id="infoCheckOut">-</p></div>
+                            <div><p style="color: var(--text-secondary); font-size: 0.875rem;">Duration</p><p id="infoDuration">-</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Property Condition -->
+                <div class="card">
+                    <h3 style="margin-bottom: 1rem;">Property Condition</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Furniture Condition</label>
+                            <select name="furnitureCondition">
+                                <option value="">Select condition...</option>
+                                <option>Excellent</option>
+                                <option>Good</option>
+                                <option>Fair</option>
+                                <option>Poor</option>
+                                <option>Needs Repair</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Appliances Condition</label>
+                            <select name="appliancesCondition">
+                                <option value="">Select condition...</option>
+                                <option>Excellent</option>
+                                <option>Good</option>
+                                <option>Fair</option>
+                                <option>Poor</option>
+                                <option>Needs Repair</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Walls/Paint Condition</label>
+                            <select name="wallsPaintCondition">
+                                <option value="">Select condition...</option>
+                                <option>Excellent</option>
+                                <option>Good</option>
+                                <option>Fair</option>
+                                <option>Poor</option>
+                                <option>Needs Repair</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">AC Condition</label>
+                            <select name="acCondition">
+                                <option value="">Select condition...</option>
+                                <option>Excellent</option>
+                                <option>Good</option>
+                                <option>Fair</option>
+                                <option>Poor</option>
+                                <option>Needs Repair</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Utilities Status</label>
+                            <select name="utilitiesStatus">
+                                <option value="">Select status...</option>
+                                <option>Working</option>
+                                <option>Partially Working</option>
+                                <option>Not Working</option>
+                                <option>N/A</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Cleanliness Status</label>
+                            <select name="cleanlinessStatus">
+                                <option value="">Select status...</option>
+                                <option>Clean</option>
+                                <option>Needs Cleaning</option>
+                                <option>Not Clean</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Notes -->
+                <div class="card">
+                    <h3 style="margin-bottom: 1rem;">Additional Notes</h3>
+                    <textarea name="additionalNotes" placeholder="Enter any additional observations or notes..." rows="4"></textarea>
+                </div>
+
+                <!-- Media Upload -->
+                <div class="card">
+                    <h3 style="margin-bottom: 1rem;">Photos & Videos</h3>
+                    <div class="upload-zone" onclick="document.getElementById('fileInput').click()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                        <p style="font-weight: 500; margin-bottom: 0.5rem;">Click to upload files</p>
+                        <p style="font-size: 0.875rem; color: var(--text-secondary);">Support images and videos up to 10MB each</p>
+                        <input type="file" id="fileInput" multiple accept="image/*,video/*" style="display: none;" onchange="handleFileSelect(event)">
+                    </div>
+                    <div id="fileList" class="file-list"></div>
+                </div>
+
+                <!-- Digital Signature -->
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h3>Digital Signature</h3>
+                        <button type="button" class="btn btn-sm btn-secondary" onclick="clearSignature()">Clear</button>
+                    </div>
+                    <canvas id="signaturePad" class="signature-pad"></canvas>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin-top: 0.5rem;">Sign above to confirm the checklist accuracy</p>
+                </div>
+
+                <!-- Submit Buttons -->
+                <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                    <a href="tenants.html" class="btn btn-secondary" style="flex: 1;">Cancel</a>
+                    <button type="submit" class="btn btn-primary" style="flex: 1;" id="submitBtn">
+                        <span class="btn-text">Submit Checklist</span>
+                        <span class="btn-loading hidden">
+                            <svg class="spinner" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+                            Submitting...
+                        </span>
+                    </button>
+                </div>
+            </form>
+        </main>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/app.js"></script>
+    <script>
+        // Protect page
+        if (!Auth.protectPage()) {
+            throw new Error('Not authenticated');
+        }
+
+        // Get checklist type from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const checklistType = urlParams.get('type') || 'check_in';
+        const preselectedTenantId = urlParams.get('tenantId');
+
+        // Update page title
+        document.getElementById('pageTitle').textContent = 
+            checklistType === 'check_in' ? 'Check-In Checklist' : 'Check-Out Checklist';
+
+        let selectedFiles = [];
+        let signatureData = '';
+
+        // Load tenants
+        async function loadTenants() {
+            try {
+                const data = await API.tenants.getAll({ status: 'active' });
+                const select = document.getElementById('tenantSelect');
+                
+                select.innerHTML = '<option value="">Select a tenant...</option>' +
+                    data.tenants.map(t => `<option value="${t.id}" data-tenant='${JSON.stringify(t)}'>${t.fullName} - ${t.studioName}</option>`).join('');
+
+                // Preselect tenant if provided
+                if (preselectedTenantId) {
+                    select.value = preselectedTenantId;
+                    updateTenantInfo(data.tenants.find(t => t.id == preselectedTenantId));
+                }
+            } catch (error) {
+                App.toast(error.message, 'error');
+            }
+        }
+
+        // Update tenant info display
+        function updateTenantInfo(tenant) {
+            const infoDiv = document.getElementById('tenantInfo');
+            if (tenant) {
+                document.getElementById('infoStudio').textContent = tenant.studioName;
+                document.getElementById('infoCheckIn').textContent = App.formatDate(tenant.checkInDate);
+                document.getElementById('infoCheckOut').textContent = App.formatDate(tenant.checkOutDate);
+                document.getElementById('infoDuration').textContent = tenant.durationDays + ' days';
+                infoDiv.style.display = 'block';
+            } else {
+                infoDiv.style.display = 'none';
+            }
+        }
+
+        // Tenant select change
+        document.getElementById('tenantSelect').addEventListener('change', (e) => {
+            const option = e.target.selectedOptions[0];
+            const tenant = option.dataset.tenant ? JSON.parse(option.dataset.tenant) : null;
+            updateTenantInfo(tenant);
+        });
+
+        // File handling
+        function handleFileSelect(event) {
+            const files = Array.from(event.target.files);
+            selectedFiles = [...selectedFiles, ...files];
+            renderFileList();
+        }
+
+        function renderFileList() {
+            const container = document.getElementById('fileList');
+            container.innerHTML = selectedFiles.map((file, index) => `
+                <div class="file-item">
+                    <button type="button" class="file-remove" onclick="removeFile(${index})">×</button>
+                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                        <span style="font-size: 0.875rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${file.name}</span>
+                    </div>
+                    <p style="font-size: 0.75rem; color: var(--text-secondary);">${(file.size / 1024 / 1024).toFixed(2)} MB</p>
+                </div>
+            `).join('');
+        }
+
+        function removeFile(index) {
+            selectedFiles.splice(index, 1);
+            renderFileList();
+        }
+
+        // Signature pad
+        const canvas = document.getElementById('signaturePad');
+        const ctx = canvas.getContext('2d');
+        let isDrawing = false;
+
+        // Set canvas size
+        function resizeCanvas() {
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+            ctx.strokeStyle = '#F6F6F6';
+            ctx.lineWidth = 2;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        function getPos(e) {
+            const rect = canvas.getBoundingClientRect();
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            return {
+                x: clientX - rect.left,
+                y: clientY - rect.top
+            };
+        }
+
+        function startDrawing(e) {
+            isDrawing = true;
+            const pos = getPos(e);
+            ctx.beginPath();
+            ctx.moveTo(pos.x, pos.y);
+            e.preventDefault();
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            const pos = getPos(e);
+            ctx.lineTo(pos.x, pos.y);
+            ctx.stroke();
+            e.preventDefault();
+        }
+
+        function stopDrawing() {
+            isDrawing = false;
+            signatureData = canvas.toDataURL();
+        }
+
+        function clearSignature() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            signatureData = '';
+        }
+
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mouseleave', stopDrawing);
+        canvas.addEventListener('touchstart', startDrawing);
+        canvas.addEventListener('touchmove', draw);
+        canvas.addEventListener('touchend', stopDrawing);
+
+        // Form submit
+        document.getElementById('checklistForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const tenantId = document.getElementById('tenantSelect').value;
+            if (!tenantId) {
+                App.toast('Please select a tenant', 'error');
+                return;
+            }
+
+            const submitBtn = document.getElementById('submitBtn');
+            App.setLoading(submitBtn, true);
+
+            try {
+                const formData = new FormData();
+                formData.append('tenantId', tenantId);
+                formData.append('checklistType', checklistType);
+                formData.append('furnitureCondition', document.querySelector('[name="furnitureCondition"]').value);
+                formData.append('appliancesCondition', document.querySelector('[name="appliancesCondition"]').value);
+                formData.append('wallsPaintCondition', document.querySelector('[name="wallsPaintCondition"]').value);
+                formData.append('acCondition', document.querySelector('[name="acCondition"]').value);
+                formData.append('utilitiesStatus', document.querySelector('[name="utilitiesStatus"]').value);
+                formData.append('cleanlinessStatus', document.querySelector('[name="cleanlinessStatus"]').value);
+                formData.append('additionalNotes', document.querySelector('[name="additionalNotes"]').value);
+                formData.append('digitalSignature', signatureData);
+
+                selectedFiles.forEach(file => {
+                    formData.append('mediaFiles', file);
+                });
+
+                await API.checklists.create(formData);
+                App.toast(`${checklistType === 'check_in' ? 'Check-In' : 'Check-Out'} completed successfully!`, 'success');
+                
+                setTimeout(() => {
+                    window.location.href = 'tenants.html';
+                }, 1000);
+            } catch (error) {
+                App.toast(error.message, 'error');
+                App.setLoading(submitBtn, false);
+            }
+        });
+
+        // Load data
+        loadTenants();
+    </script>
+</body>
+</html>
