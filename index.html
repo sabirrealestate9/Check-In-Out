@@ -1091,21 +1091,40 @@ async function loadStudiosFromSheet() {
   try {
     const res = await fetch(SHEET_STUDIOS_API, { cache: "no-store" });
     if (!res.ok) throw new Error(`Studios API error ${res.status}`);
-    const data = await res.json();
 
-    if (!data || !Array.isArray(data.studios)) {
-      throw new Error("Invalid studios response. Expected: { studios: [...] }");
+    const raw = await res.json();
+
+    // 1) Normalize to an array
+    let arr =
+      Array.isArray(raw) ? raw :
+      Array.isArray(raw?.studios) ? raw.studios :
+      Array.isArray(raw?.data) ? raw.data :
+      Array.isArray(raw?.items) ? raw.items :
+      Array.isArray(raw?.rows) ? raw.rows :
+      null;
+
+    if (!arr) {
+      throw new Error("Invalid studios response. Web App must return an array OR { studios: [...] }");
     }
 
-    // Remove empty values + trim + unique
-    const studios = Array.from(new Set(
-      data.studios.map(x => String(x || "").trim()).filter(Boolean)
-    ));
+    // 2) Convert each item to a string studio name
+    const studios = arr.map(x => {
+      if (typeof x === "string" || typeof x === "number") return String(x).trim();
 
-    window.__studioCache = studios;
+      // common object keys
+      const candidate =
+        x?.StudioId ?? x?.studioId ?? x?.studio ?? x?.name ?? x?.StudioName ?? x?.studioName ?? "";
 
-    fillSelect("ci-studioName", studios, "— Select Studio —");
-    toast(`Loaded ${studios.length} studios from Sheet.`, "ok");
+      return String(candidate || "").trim();
+    }).filter(Boolean);
+
+    // 3) Unique
+    const unique = Array.from(new Set(studios));
+    window.__studioCache = unique;
+
+    fillSelect("ci-studioName", unique, "— Select Studio —");
+
+    toast(`Loaded ${unique.length} studios from Sheet.`, "ok");
   } catch (e) {
     console.error(e);
     toast(e.message || "Failed to load studios from Sheet", "err");
