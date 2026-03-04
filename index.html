@@ -1591,107 +1591,48 @@ async function loadStaysForCheckout() {
     toast(e.message, 'err');
   }
 }
-const SHEET_STUDIOS_API = "https://script.google.com/macros/s/AKfycbxsUQBW4L1FPpcdCyZXUJrKxHj8Eokq1mnzchUS6887ZR3kaGpSmSLtMuij1gJEzzBR/exec";
+const SHEET_STUDIOS_API =
+  "https://script.google.com/macros/s/AKfycbxsUQBW4L1FPpcdCyZXUJrKxHj8Eokq1mnzchUS6887ZR3kaGpSmSLtMuij1gJEzzBR/exec";
 
 async function loadStudiosFromSheet() {
   try {
     const res = await fetch(SHEET_STUDIOS_API, { cache: "no-store" });
     if (!res.ok) throw new Error(`Studios API error ${res.status}`);
+
     const data = await res.json();
+    const studios = data?.studios;
 
-    if (!data.studios || !Array.isArray(data.studios)) {
-      throw new Error("Invalid studios response");
-    }
+    if (!Array.isArray(studios)) throw new Error("Invalid studios response (studios array missing).");
 
-    // Fill Check-In dropdown
-    fillSelect("ci-studioName", data.studios, "— Select Studio —");
+    fillSelect("ci-studioName", studios, "— Select Studio —");
 
-    // If you also want these:
-    // fillSelect("br-studioSelect", data.studios, "— Select a studio —");
-    // fillSelect("co-studioSelect", data.studios, "— Select a studio —");
-
-    toast(`Loaded ${data.studios.length} studios from Sheet.`, "ok");
+    toast(`Loaded ${studios.length} studios from Sheet.`, "ok");
   } catch (e) {
     console.error(e);
     toast(e.message || "Failed to load studios from Sheet", "err");
   }
 }
 
-const SHEET_STUDIOS_API = "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
+function fillSelect(selectId, items, placeholder) {
+  const sel = document.getElementById(selectId);
+  if (!sel) return;
 
-async function loadStudiosFromSheet() {
-  try {
-    const res = await fetch(SHEET_STUDIOS_API, { cache: "no-store" });
-    if (!res.ok) throw new Error(`Studios API error ${res.status}`);
-    const data = await res.json();
+  const prev = sel.value;
 
-    if (!data.studios || !Array.isArray(data.studios)) {
-      throw new Error("Invalid studios response");
-    }
+  sel.innerHTML = "";
+  const opt0 = document.createElement("option");
+  opt0.value = "";
+  opt0.textContent = placeholder || "— Select —";
+  sel.appendChild(opt0);
 
-    // Fill Check-In dropdown
-    fillSelect("ci-studioName", data.studios, "— Select Studio —");
+  items.forEach(name => {
+    const opt = document.createElement("option");
+    opt.value = name;
+    opt.textContent = name;
+    sel.appendChild(opt);
+  });
 
-    // If you also want these:
-    // fillSelect("br-studioSelect", data.studios, "— Select a studio —");
-    // fillSelect("co-studioSelect", data.studios, "— Select a studio —");
-
-    toast(`Loaded ${data.studios.length} studios from Sheet.`, "ok");
-  } catch (e) {
-    console.error(e);
-    toast(e.message || "Failed to load studios from Sheet", "err");
-  }
-}
-
-const SHEET_STUDIOS_API = "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
-
-async function loadStudiosFromSheet() {
-  try {
-    const res = await fetch(SHEET_STUDIOS_API, { cache: "no-store" });
-    if (!res.ok) throw new Error(`Studios API error ${res.status}`);
-    const data = await res.json();
-
-    if (!data.studios || !Array.isArray(data.studios)) {
-      throw new Error("Invalid studios response");
-    }
-
-    // Fill Check-In dropdown
-    fillSelect("ci-studioName", data.studios, "— Select Studio —");
-
-    // If you also want these:
-    // fillSelect("br-studioSelect", data.studios, "— Select a studio —");
-    // fillSelect("co-studioSelect", data.studios, "— Select a studio —");
-
-    toast(`Loaded ${data.studios.length} studios from Sheet.`, "ok");
-  } catch (e) {
-    console.error(e);
-    toast(e.message || "Failed to load studios from Sheet", "err");
-  }
-}
-const SHEET_STUDIOS_API = "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
-
-async function loadStudiosFromSheet() {
-  try {
-    const res = await fetch(SHEET_STUDIOS_API, { cache: "no-store" });
-    if (!res.ok) throw new Error(`Studios API error ${res.status}`);
-    const data = await res.json();
-
-    if (!data.studios || !Array.isArray(data.studios)) {
-      throw new Error("Invalid studios response");
-    }
-
-    // Fill Check-In dropdown
-    fillSelect("ci-studioName", data.studios, "— Select Studio —");
-
-    // If you also want these:
-    // fillSelect("br-studioSelect", data.studios, "— Select a studio —");
-    // fillSelect("co-studioSelect", data.studios, "— Select a studio —");
-
-    toast(`Loaded ${data.studios.length} studios from Sheet.`, "ok");
-  } catch (e) {
-    console.error(e);
-    toast(e.message || "Failed to load studios from Sheet", "err");
-  }
+  if (prev && items.includes(prev)) sel.value = prev;
 }
 
 function fillSelect(selectId, items, placeholder) {
