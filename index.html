@@ -774,7 +774,9 @@
         Stay Details
       </div>
       <div class="form-grid-3">
-        <div class="field"><label>Studio Name *</label><input id="ci-studioName" placeholder="e.g. Studio A101" /></div>
+        <div class="field"><label>Studio Name *</label><select id="ci-studioName">
+  <option value="">— Select Studio —</option>
+</select></div>
         <div class="field"><label>Floor / Building</label><input id="ci-floorBuilding" placeholder="e.g. Floor 3, Tower B" /></div>
         <div class="field"><label>Monthly Rate (AED)</label><input id="ci-rent" type="number" placeholder="e.g. 4500" /></div>
         <div class="field"><label>Check-In Date *</label><input id="ci-checkinDate" type="date" onchange="calcDuration('ci')" /></div>
@@ -1589,7 +1591,131 @@ async function loadStaysForCheckout() {
     toast(e.message, 'err');
   }
 }
+const SHEET_STUDIOS_API = "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
 
+async function loadStudiosFromSheet() {
+  try {
+    const res = await fetch(SHEET_STUDIOS_API, { cache: "no-store" });
+    if (!res.ok) throw new Error(`Studios API error ${res.status}`);
+    const data = await res.json();
+
+    if (!data.studios || !Array.isArray(data.studios)) {
+      throw new Error("Invalid studios response");
+    }
+
+    // Fill Check-In dropdown
+    fillSelect("ci-studioName", data.studios, "— Select Studio —");
+
+    // If you also want these:
+    // fillSelect("br-studioSelect", data.studios, "— Select a studio —");
+    // fillSelect("co-studioSelect", data.studios, "— Select a studio —");
+
+    toast(`Loaded ${data.studios.length} studios from Sheet.`, "ok");
+  } catch (e) {
+    console.error(e);
+    toast(e.message || "Failed to load studios from Sheet", "err");
+  }
+}
+
+const SHEET_STUDIOS_API = "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
+
+async function loadStudiosFromSheet() {
+  try {
+    const res = await fetch(SHEET_STUDIOS_API, { cache: "no-store" });
+    if (!res.ok) throw new Error(`Studios API error ${res.status}`);
+    const data = await res.json();
+
+    if (!data.studios || !Array.isArray(data.studios)) {
+      throw new Error("Invalid studios response");
+    }
+
+    // Fill Check-In dropdown
+    fillSelect("ci-studioName", data.studios, "— Select Studio —");
+
+    // If you also want these:
+    // fillSelect("br-studioSelect", data.studios, "— Select a studio —");
+    // fillSelect("co-studioSelect", data.studios, "— Select a studio —");
+
+    toast(`Loaded ${data.studios.length} studios from Sheet.`, "ok");
+  } catch (e) {
+    console.error(e);
+    toast(e.message || "Failed to load studios from Sheet", "err");
+  }
+}
+
+const SHEET_STUDIOS_API = "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
+
+async function loadStudiosFromSheet() {
+  try {
+    const res = await fetch(SHEET_STUDIOS_API, { cache: "no-store" });
+    if (!res.ok) throw new Error(`Studios API error ${res.status}`);
+    const data = await res.json();
+
+    if (!data.studios || !Array.isArray(data.studios)) {
+      throw new Error("Invalid studios response");
+    }
+
+    // Fill Check-In dropdown
+    fillSelect("ci-studioName", data.studios, "— Select Studio —");
+
+    // If you also want these:
+    // fillSelect("br-studioSelect", data.studios, "— Select a studio —");
+    // fillSelect("co-studioSelect", data.studios, "— Select a studio —");
+
+    toast(`Loaded ${data.studios.length} studios from Sheet.`, "ok");
+  } catch (e) {
+    console.error(e);
+    toast(e.message || "Failed to load studios from Sheet", "err");
+  }
+}
+const SHEET_STUDIOS_API = "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
+
+async function loadStudiosFromSheet() {
+  try {
+    const res = await fetch(SHEET_STUDIOS_API, { cache: "no-store" });
+    if (!res.ok) throw new Error(`Studios API error ${res.status}`);
+    const data = await res.json();
+
+    if (!data.studios || !Array.isArray(data.studios)) {
+      throw new Error("Invalid studios response");
+    }
+
+    // Fill Check-In dropdown
+    fillSelect("ci-studioName", data.studios, "— Select Studio —");
+
+    // If you also want these:
+    // fillSelect("br-studioSelect", data.studios, "— Select a studio —");
+    // fillSelect("co-studioSelect", data.studios, "— Select a studio —");
+
+    toast(`Loaded ${data.studios.length} studios from Sheet.`, "ok");
+  } catch (e) {
+    console.error(e);
+    toast(e.message || "Failed to load studios from Sheet", "err");
+  }
+}
+
+function fillSelect(selectId, items, placeholder) {
+  const sel = document.getElementById(selectId);
+  if (!sel) return;
+
+  const prev = sel.value;
+
+  sel.innerHTML = "";
+  const opt0 = document.createElement("option");
+  opt0.value = "";
+  opt0.textContent = placeholder || "— Select —";
+  sel.appendChild(opt0);
+
+  items.forEach(name => {
+    const opt = document.createElement("option");
+    opt.value = name;
+    opt.textContent = name;
+    sel.appendChild(opt);
+  });
+
+  // restore previous value if still exists
+  if (prev && items.includes(prev)) sel.value = prev;
+}
 async function loadFilesForBrowse(folderId, cardEl) {
   document.querySelectorAll('.stay-card').forEach(c => c.classList.remove('selected'));
   cardEl.classList.add('selected');
