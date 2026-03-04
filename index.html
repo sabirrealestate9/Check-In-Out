@@ -614,7 +614,7 @@
     <div class="btn-row">
       <button class="btn btn-primary" onclick="submitCheckIn()">Submit Check-In &amp; Upload to Drive</button>
       <button class="btn btn-secondary" onclick="resetForm('ci')">Reset Form</button>
-      <button class="btn btn-secondary" onclick="loadStudiosFromSheet()">🔄 Refresh Studios (Sheet)</button>
+      <button class="btn btn-secondary" onclick="loadStudiosFromDrive()">🔄 Refresh Studios (Drive)</button>
     </div>
   </div>
 
@@ -783,8 +783,7 @@ const CLIENT_ID = "433302852285-ofo7g69rfe2e98eaa62a9s1okh8djdal.apps.googleuser
 const ROOT_FOLDER_ID = "1JP-T6pbFdmJM6FlwheOV554gPP8mLCBX";
 const DRIVE_SCOPE = "https://www.googleapis.com/auth/drive";
 
-/* ✅ Must return { studios: [...] } */
-const SHEET_STUDIOS_API = "https://script.google.com/macros/s/AKfycbyih2KZS_GglWXdqcJFkVAgoIUFfNEmCecRcjsWIWk5-P4Od_zQjMINbhnhePrUvZCYTw/exec";
+
 
 /* ==========================
    STATE
@@ -841,8 +840,7 @@ window.addEventListener('load', () => {
   document.getElementById('co-checkoutDate').value = today;
 
   // Always load studios from sheet (no sign-in needed)
-  fillSelect("ci-studioName", [], "— Loading studios… —");
-  loadStudiosFromSheet();
+fillSelect("ci-studioName", [], "— Sign in to load studios… —");
 
   const gsiScript = document.querySelector('script[src*="gsi/client"]');
   if (typeof google !== 'undefined' && google.accounts && google.accounts.oauth2) {
@@ -882,7 +880,8 @@ function initTokenClient() {
       document.getElementById('signinRealBtn').style.color = 'var(--success)';
 
       toast('Signed in successfully. Drive access enabled.', 'ok');
-
+// Load studio list for Check-In from Drive subfolders
+loadStudiosFromDrive();
       // Drive listings (optional)
       loadStudiosForBrowse();
       loadStudiosForCheckout();
@@ -1229,7 +1228,35 @@ async function listChildren(parentId, type = null) {
   const d = await driveFetch(url);
   return d.files || [];
 }
+/* ==========================
+   DRIVE -> STUDIO DROPDOWN (ROOT FOLDER SUBFOLDERS)
+========================== */
+async function loadStudiosFromDrive() {
+  try {
+    requireAuth();
 
+    // list subfolders under ROOT_FOLDER_ID
+    const folders = await listChildren(ROOT_FOLDER_ID, 'folder');
+
+    const studios = (folders || [])
+      .map(f => String(f.name || '').trim())
+      .filter(Boolean);
+
+    const unique = Array.from(new Set(studios)).sort((a,b) => a.localeCompare(b));
+
+    window.__studioCache = unique;
+
+    // Check-In dropdown
+    fillSelect("ci-studioName", unique, "— Select Studio —");
+
+    // Browse/Checkout dropdowns (Drive ID based) already load using loadStudiosGeneric()
+    toast(`Loaded ${unique.length} studios from Drive.`, "ok");
+  } catch (e) {
+    console.error(e);
+    fillSelect("ci-studioName", [], "— Select Studio —");
+    toast(e.message || "Failed to load studios from Drive", "err");
+  }
+}
 /* ==========================
    PROGRESS
 ========================== */
