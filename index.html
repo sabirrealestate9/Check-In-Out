@@ -1197,17 +1197,29 @@ async function driveFetch(url, options = {}) {
 }
 
 async function findChildFolder(parentId, name) {
-  const q = `'${parentId}' in parents and mimeType='application/vnd.google-apps.folder' and name='${name.replace(/'/g,"\\'")}' and trashed=false`;
-  const d = await driveFetch(`https://www.googleapis.com/drive/v3/files?q=${encodeURIComponent(q)}&fields=files(id,name)`);
+  const q =
+    `'${parentId}' in parents and mimeType='application/vnd.google-apps.folder' ` +
+    `and name='${name.replace(/'/g,"\\'")}' and trashed=false`;
+
+  const url =
+    `https://www.googleapis.com/drive/v3/files` +
+    `?q=${encodeURIComponent(q)}` +
+    `&fields=files(id,name)` +
+    `&supportsAllDrives=true&includeItemsFromAllDrives=true`;
+
+  const d = await driveFetch(url);
   return d.files?.[0]?.id || null;
 }
 
 async function createFolder(parentId, name) {
-  const d = await driveFetch('https://www.googleapis.com/drive/v3/files?fields=id,name', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name, mimeType: 'application/vnd.google-apps.folder', parents: [parentId] })
-  });
+  const d = await driveFetch(
+    'https://www.googleapis.com/drive/v3/files?fields=id,name&supportsAllDrives=true',
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, mimeType: 'application/vnd.google-apps.folder', parents: [parentId] })
+    }
+  );
   return d.id;
 }
 
@@ -1239,9 +1251,17 @@ async function uploadJson(parentId, filename, data) {
 async function listChildren(parentId, type = null) {
   let q = `'${parentId}' in parents and trashed=false`;
   if (type === 'folder') q += ` and mimeType='application/vnd.google-apps.folder'`;
-  const url = `https://www.googleapis.com/drive/v3/files?q=${encodeURIComponent(q)}&fields=files(id,name,mimeType,webViewLink,modifiedTime,size)&orderBy=modifiedTime desc`;
+
+  const url =
+    `https://www.googleapis.com/drive/v3/files` +
+    `?q=${encodeURIComponent(q)}` +
+    `&fields=files(id,name,mimeType,webViewLink,modifiedTime,size)` +
+    `&orderBy=modifiedTime desc` +
+    `&supportsAllDrives=true&includeItemsFromAllDrives=true`;
+
   const d = await driveFetch(url);
   return d.files || [];
+
 }
 
 /* ══════════════════════════════════════════════════
