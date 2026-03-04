@@ -1036,7 +1036,6 @@ window.addEventListener('load', () => {
   buildChecklistGrid('ci');
   buildChecklistGrid('co');
 
-  // Set today's date defaults
   const today = new Date().toISOString().split('T')[0];
   document.getElementById('ci-checkinDate').value = today;
   document.getElementById('co-checkoutDate').value = today;
@@ -1046,6 +1045,9 @@ window.addEventListener('load', () => {
   } else {
     document.querySelector('script[src*="gsi"]').addEventListener('load', initTokenClient);
   }
+
+  // ✅ ADD THIS
+  loadStudiosFromSheet();
 });
 
 function initTokenClient() {
