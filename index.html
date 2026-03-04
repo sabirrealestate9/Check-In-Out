@@ -38,7 +38,6 @@
       min-height: 100vh;
     }
 
-    /* ─── HEADER ─────────────────────────────────── */
     header {
       background: var(--dark);
       padding: 0 40px;
@@ -103,7 +102,6 @@
     .auth-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); }
     .auth-dot.active { background: #4CAF50; }
 
-    /* ─── TABS NAV ───────────────────────────────── */
     .tab-nav {
       background: var(--white);
       border-bottom: 1px solid var(--border);
@@ -131,7 +129,6 @@
     .tab-btn:hover { color: var(--gold); }
     .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
 
-    /* ─── MAIN ───────────────────────────────────── */
     main {
       max-width: 1000px;
       margin: 0 auto;
@@ -141,7 +138,6 @@
     .tab-panel { display: none; }
     .tab-panel.active { display: block; }
 
-    /* ─── SECTION TITLE ──────────────────────────── */
     .section-header { margin-bottom: 28px; }
 
     .section-header h2 {
@@ -154,10 +150,8 @@
     }
 
     .section-header h2 em { color: var(--gold); font-style: italic; }
-
     .section-header p { color: var(--muted); font-size: 13px; margin-top: 6px; }
 
-    /* ─── FORM CARDS ─────────────────────────────── */
     .form-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
@@ -181,8 +175,6 @@
       align-items: center;
       gap: 8px;
     }
-
-    .form-card-title svg { flex-shrink: 0; }
 
     .form-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
     .form-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
@@ -227,7 +219,6 @@
 
     .field textarea { min-height: 110px; resize: vertical; }
 
-    /* ─── CHECKLIST ITEMS ────────────────────────── */
     .checklist-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -252,7 +243,6 @@
     .check-item input[type="checkbox"] { accent-color: var(--gold); width: 15px; height: 15px; cursor: pointer; }
     .check-item.checked { border-color: var(--gold); background: var(--gold-pale); }
 
-    /* ─── FILE UPLOAD ────────────────────────────── */
     .file-upload-zone {
       border: 2px dashed var(--border);
       border-radius: 8px;
@@ -279,7 +269,6 @@
     }
 
     .file-upload-icon { font-size: 28px; margin-bottom: 8px; }
-
     .file-upload-zone p { font-size: 13px; color: var(--muted); line-height: 1.5; }
     .file-upload-zone strong { color: var(--gold); }
 
@@ -308,7 +297,6 @@
     }
     .file-chip button:hover { color: var(--white); }
 
-    /* ─── BUTTONS ────────────────────────────────── */
     .btn-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
 
     .btn {
@@ -332,7 +320,6 @@
 
     .btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none !important; }
 
-    /* ─── SIGN-IN BTN ────────────────────────────── */
     .btn-google {
       font-family: 'DM Sans', sans-serif;
       font-size: 13px;
@@ -351,14 +338,13 @@
     }
     .btn-google:hover { border-color: var(--gold); box-shadow: 0 2px 12px rgba(184,147,63,0.15); }
 
-    /* ─── TOAST ──────────────────────────────────── */
     #toast {
       position: fixed;
       bottom: 32px;
       right: 32px;
       z-index: 999;
       min-width: 300px;
-      max-width: 420px;
+      max-width: 520px;
       padding: 14px 20px;
       border-radius: 8px;
       font-size: 13px;
@@ -374,15 +360,13 @@
     }
 
     #toast.show { transform: translateY(0); opacity: 1; }
-
     #toast.info { background: var(--dark); color: var(--white); }
     #toast.ok { background: #1E4A26; color: #A8E6B0; border-left: 3px solid #4CAF50; }
     #toast.err { background: #3D0F16; color: #F4A0A8; border-left: 3px solid var(--error); }
 
     #toast .toast-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
-    #toast .toast-msg { line-height: 1.5; }
+    #toast .toast-msg { line-height: 1.5; word-break: break-word; }
 
-    /* ─── PROGRESS ───────────────────────────────── */
     .progress-wrap { background: var(--border); border-radius: 4px; height: 4px; margin-top: 14px; overflow: hidden; display: none; }
     .progress-wrap.visible { display: block; }
 
@@ -397,7 +381,6 @@
     .progress-label { font-size: 11px; color: var(--muted); margin-top: 6px; display: none; }
     .progress-label.visible { display: block; }
 
-    /* ─── BROWSE ─────────────────────────────────── */
     .browse-filters { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
     @media (max-width: 600px) { .browse-filters { grid-template-columns: 1fr; } }
 
@@ -463,7 +446,6 @@
     .empty-state .empty-icon { font-size: 36px; margin-bottom: 12px; }
     .empty-state p { font-size: 13px; }
 
-    /* ─── SPINNER ────────────────────────────────── */
     .spinner {
       display: inline-block;
       width: 14px;
@@ -477,7 +459,6 @@
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* ─── RESPONSIVE ─────────────────────────────── */
     @media (max-width: 600px) {
       header { padding: 0 16px; }
       .tab-nav { padding: 0 16px; }
@@ -532,7 +513,6 @@
       <p>Record tenant arrival, upload inspection media, and store securely in Google Drive.</p>
     </div>
 
-    <!-- Tenant Info -->
     <div class="form-card">
       <div class="form-card-title">
         <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -551,7 +531,6 @@
       </div>
     </div>
 
-    <!-- Stay Details -->
     <div class="form-card">
       <div class="form-card-title">
         <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -587,7 +566,6 @@
       </div>
     </div>
 
-    <!-- Condition Checklist -->
     <div class="form-card">
       <div class="form-card-title">
         <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -604,7 +582,6 @@
       </div>
     </div>
 
-    <!-- File Uploads -->
     <div class="form-card">
       <div class="form-card-title">
         <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -637,6 +614,7 @@
     <div class="btn-row">
       <button class="btn btn-primary" onclick="submitCheckIn()">Submit Check-In &amp; Upload to Drive</button>
       <button class="btn btn-secondary" onclick="resetForm('ci')">Reset Form</button>
+      <button class="btn btn-secondary" onclick="loadStudiosFromSheet()">🔄 Refresh Studios (Sheet)</button>
     </div>
   </div>
 
@@ -647,7 +625,6 @@
       <p>Record tenant departure, document the studio condition, and finalize the stay record.</p>
     </div>
 
-    <!-- Load existing stay -->
     <div class="form-card">
       <div class="form-card-title">
         <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -672,10 +649,9 @@
         </div>
       </div>
 
-      <button class="btn btn-secondary" onclick="loadStudiosForCheckout()">🔄 Refresh Studio List</button>
+      <button class="btn btn-secondary" onclick="loadStudiosForCheckout()">🔄 Refresh Studio List (Drive)</button>
     </div>
 
-    <!-- Check-out info -->
     <div class="form-card">
       <div class="form-card-title">
         <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -709,7 +685,6 @@
       </div>
     </div>
 
-    <!-- Checkout condition checklist -->
     <div class="form-card">
       <div class="form-card-title">
         <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -726,7 +701,6 @@
       </div>
     </div>
 
-    <!-- Files -->
     <div class="form-card">
       <div class="form-card-title">
         <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -780,7 +754,7 @@
                 onchange="loadStaysForBrowse()">
           <option value="">— Select a studio —</option>
         </select>
-        <button class="btn btn-secondary" onclick="loadStudiosForBrowse()">🔄 Refresh</button>
+        <button class="btn btn-secondary" onclick="loadStudiosForBrowse()">🔄 Refresh (Drive)</button>
       </div>
     </div>
 
@@ -796,38 +770,33 @@
 
 </main>
 
-<!-- ─── TOAST ─── -->
 <div id="toast">
   <span class="toast-icon" id="toastIcon"></span>
   <span class="toast-msg" id="toastMsg"></span>
 </div>
 
 <script>
-/* ══════════════════════════════════════════════════
+/* ==========================
    CONFIG (EDIT THESE)
-══════════════════════════════════════════════════ */
-// Your OAuth client id
+========================== */
 const CLIENT_ID = "433302852285-ofo7g69rfe2e98eaa62a9s1okh8djdal.apps.googleusercontent.com";
-
-// Root Google Drive folder for storing check-in/out data
 const ROOT_FOLDER_ID = "1JP-T6pbFdmJM6FlwheOV554gPP8mLCBX";
-
-// Drive scope (full drive)
 const DRIVE_SCOPE = "https://www.googleapis.com/auth/drive";
 
-// ✅ Your Apps Script web app to return studio list as JSON { studios: [...] }
+/* ✅ Must return { studios: [...] } */
 const SHEET_STUDIOS_API = "https://script.google.com/macros/s/AKfycbxNpy_EmJBe5nHIupFHNSQJBSnh9hBpBYZbQuHBcvcKjse-khjS9bVq5EbyZLUMuvua/exec";
 
-/* ══════════════════════════════════════════════════
+/* ==========================
    STATE
-══════════════════════════════════════════════════ */
+========================== */
 let accessToken = null;
 let tokenClient = null;
 let selectedFiles = { ci: [], co: [] };
+window.__studioCache = [];
 
-/* ══════════════════════════════════════════════════
-   CHECKLIST ITEMS
-══════════════════════════════════════════════════ */
+/* ==========================
+   CHECKLIST
+========================== */
 const checklistItems = [
   "Keys Received","Air Conditioning","TV & Remote","Wi-Fi Router",
   "Refrigerator","Microwave","Washing Machine","Water Heater",
@@ -860,22 +829,21 @@ function getChecklist(prefix) {
   }));
 }
 
-/* ══════════════════════════════════════════════════
+/* ==========================
    INIT
-══════════════════════════════════════════════════ */
+========================== */
 window.addEventListener('load', () => {
   buildChecklistGrid('ci');
   buildChecklistGrid('co');
 
-  // Set today's date defaults
   const today = new Date().toISOString().split('T')[0];
   document.getElementById('ci-checkinDate').value = today;
   document.getElementById('co-checkoutDate').value = today;
 
-  // Initialize studio dropdown with placeholder immediately
-  fillSelect("ci-studioName", [], "— Select Studio —");
+  // Always load studios from sheet (no sign-in needed)
+  fillSelect("ci-studioName", [], "— Loading studios… —");
+  loadStudiosFromSheet();
 
-  // Wait for GIS script to load
   const gsiScript = document.querySelector('script[src*="gsi/client"]');
   if (typeof google !== 'undefined' && google.accounts && google.accounts.oauth2) {
     initTokenClient();
@@ -886,9 +854,9 @@ window.addEventListener('load', () => {
   }
 });
 
-/* ══════════════════════════════════════════════════
-   GOOGLE AUTH (Token Client)
-══════════════════════════════════════════════════ */
+/* ==========================
+   GOOGLE AUTH (Drive)
+========================== */
 function initTokenClient() {
   if (!google || !google.accounts || !google.accounts.oauth2) {
     toast("Google Identity Services failed to load.", "err");
@@ -907,17 +875,15 @@ function initTokenClient() {
       }
 
       accessToken = resp.access_token;
+
       document.getElementById('authDot').classList.add('active');
       document.getElementById('authName').textContent = 'Signed in';
       document.getElementById('signinRealBtn').textContent = '✓ Connected';
       document.getElementById('signinRealBtn').style.color = 'var(--success)';
 
-      toast('Signed in successfully. Ready to use.', 'ok');
+      toast('Signed in successfully. Drive access enabled.', 'ok');
 
-      // Load studios from Google Sheet into dropdown
-      loadStudiosFromSheet();
-
-      // Load drive folders lists too
+      // Drive listings (optional)
       loadStudiosForBrowse();
       loadStudiosForCheckout();
     }
@@ -929,9 +895,11 @@ function initTokenClient() {
 function requestSignIn() {
   try {
     if (!tokenClient) {
-      toast('Google SDK not loaded yet. Please refresh.', 'err');
+      toast('Google SDK not loaded yet. Refresh the page.', 'err');
       return;
     }
+
+    // IMPORTANT: OAuth needs a real origin (https:// or http://localhost). Not file://
     tokenClient.requestAccessToken({ prompt: "consent" });
   } catch (e) {
     console.error("requestSignIn error:", e);
@@ -939,9 +907,9 @@ function requestSignIn() {
   }
 }
 
-/* ══════════════════════════════════════════════════
+/* ==========================
    TOAST
-══════════════════════════════════════════════════ */
+========================== */
 let toastTimer;
 function toast(msg, type = 'info') {
   const el   = document.getElementById('toast');
@@ -953,12 +921,12 @@ function toast(msg, type = 'info') {
   txt.textContent  = msg;
   el.classList.add('show');
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => el.classList.remove('show'), type === 'err' ? 7000 : 3500);
+  toastTimer = setTimeout(() => el.classList.remove('show'), type === 'err' ? 9000 : 3500);
 }
 
-/* ══════════════════════════════════════════════════
+/* ==========================
    TABS
-══════════════════════════════════════════════════ */
+========================== */
 function switchTab(name, refresh) {
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -973,9 +941,9 @@ function switchTab(name, refresh) {
   if (refresh && name === 'browse') loadStudiosForBrowse();
 }
 
-/* ══════════════════════════════════════════════════
-   DURATION CALCULATOR
-══════════════════════════════════════════════════ */
+/* ==========================
+   DURATION
+========================== */
 function calcDuration(prefix) {
   const a = document.getElementById(`${prefix}-checkinDate`)?.value;
   const b = document.getElementById(`${prefix}-checkoutDate`)?.value;
@@ -990,9 +958,9 @@ function calcDuration(prefix) {
   durEl.value = weeks > 0 ? `${days} days (${weeks}w ${rem}d)` : `${days} days`;
 }
 
-/* ══════════════════════════════════════════════════
+/* ==========================
    FILE PREVIEW
-══════════════════════════════════════════════════ */
+========================== */
 function updateFilePreview(prefix) {
   const input = document.getElementById(`${prefix}-files`);
   selectedFiles[prefix] = Array.from(input.files || []);
@@ -1024,9 +992,9 @@ function fileIcon(f) {
   return '📎';
 }
 
-/* ══════════════════════════════════════════════════
-   RESET FORM
-══════════════════════════════════════════════════ */
+/* ==========================
+   RESET
+========================== */
 function resetForm(prefix) {
   const fields = ['tenantName','tenantId','tenantPhone','tenantEmail','nationality','emergency',
     'studioName','floorBuilding','rent','checkinDate','checkoutDate','duration','deposit',
@@ -1038,9 +1006,6 @@ function resetForm(prefix) {
     if (el) el.value = '';
   });
 
-  // reset studio dropdown to placeholder if check-in
-  if (prefix === 'ci') fillSelect("ci-studioName", window.__studioCache || [], "— Select Studio —");
-
   selectedFiles[prefix] = [];
   renderPreview(prefix);
 
@@ -1050,21 +1015,13 @@ function resetForm(prefix) {
     if (chk) chk.checked = false;
     if (lbl) lbl.classList.remove('checked');
   });
+
+  if (prefix === "ci") fillSelect("ci-studioName", window.__studioCache, "— Select Studio —");
 }
 
-/* ══════════════════════════════════════════════════
-   AUTH GUARD
-══════════════════════════════════════════════════ */
-function requireAuth() {
-  if (!accessToken) throw new Error('Please sign in with Google first.');
-}
-
-/* ══════════════════════════════════════════════════
-   GOOGLE SHEET -> STUDIO DROPDOWN
-   Expects: { "studios": ["z6 v70 r4", "z20 v321 r2", ...] }
-══════════════════════════════════════════════════ */
-window.__studioCache = [];
-
+/* ==========================
+   SHEET -> STUDIO DROPDOWN
+========================== */
 function fillSelect(selectId, items, placeholder) {
   const sel = document.getElementById(selectId);
   if (!sel) return;
@@ -1090,56 +1047,50 @@ function fillSelect(selectId, items, placeholder) {
 async function loadStudiosFromSheet() {
   try {
     const res = await fetch(SHEET_STUDIOS_API, { cache: "no-store" });
-    if (!res.ok) throw new Error(`Studios API error ${res.status}`);
 
-    const raw = await res.json();
-
-    // 1) Normalize to an array
-    let arr =
-      Array.isArray(raw) ? raw :
-      Array.isArray(raw?.studios) ? raw.studios :
-      Array.isArray(raw?.data) ? raw.data :
-      Array.isArray(raw?.items) ? raw.items :
-      Array.isArray(raw?.rows) ? raw.rows :
-      null;
-
-    if (!arr) {
-      throw new Error("Invalid studios response. Web App must return an array OR { studios: [...] }");
+    // If Apps Script returns HTML/login, this will fail JSON parse
+    const text = await res.text();
+    let raw;
+    try { raw = JSON.parse(text); }
+    catch {
+      throw new Error("Studios API returned non-JSON (HTML). Fix Apps Script deploy: Web app access must be 'Anyone'.");
     }
 
-    // 2) Convert each item to a string studio name
-    const studios = arr.map(x => {
-      if (typeof x === "string" || typeof x === "number") return String(x).trim();
+    if (!res.ok) {
+      throw new Error(`Studios API HTTP ${res.status}: ${text.slice(0, 200)}`);
+    }
 
-      // common object keys
-      const candidate =
-        x?.StudioId ?? x?.studioId ?? x?.studio ?? x?.name ?? x?.StudioName ?? x?.studioName ?? "";
+    if (!raw || !Array.isArray(raw.studios)) {
+      throw new Error("Invalid studios response. Expected { studios: [...] }. Received: " + JSON.stringify(raw).slice(0, 200));
+    }
 
-      return String(candidate || "").trim();
-    }).filter(Boolean);
+    const studios = raw.studios
+      .map(x => String(x || "").trim())
+      .filter(Boolean);
 
-    // 3) Unique
     const unique = Array.from(new Set(studios));
     window.__studioCache = unique;
 
     fillSelect("ci-studioName", unique, "— Select Studio —");
-
     toast(`Loaded ${unique.length} studios from Sheet.`, "ok");
   } catch (e) {
     console.error(e);
+    fillSelect("ci-studioName", [], "— Select Studio —");
     toast(e.message || "Failed to load studios from Sheet", "err");
   }
 }
 
-/* ══════════════════════════════════════════════════
+/* ==========================
    DRIVE HELPERS
-══════════════════════════════════════════════════ */
+========================== */
+function requireAuth() {
+  if (!accessToken) throw new Error('Please sign in with Google first (Drive access).');
+}
+
 async function driveFetch(url, options = {}) {
   requireAuth();
-
   const headers = { ...(options.headers || {}), Authorization: `Bearer ${accessToken}` };
   const res = await fetch(url, { ...options, headers });
-
   if (!res.ok) {
     const text = await res.text();
     throw new Error(`Drive API ${res.status}: ${text}`);
@@ -1181,11 +1132,8 @@ async function ensureFolder(parentId, name) {
 async function uploadFile(parentId, file, overrideName = null) {
   const metadata = { name: overrideName || file.name, parents: [parentId] };
 
-  // Resumable upload for large files
-  const RESUMABLE_THRESHOLD = 8 * 1024 * 1024; // 8MB
-  if (file.size >= RESUMABLE_THRESHOLD) {
-    return uploadFileResumable(parentId, file, overrideName);
-  }
+  const RESUMABLE_THRESHOLD = 8 * 1024 * 1024;
+  if (file.size >= RESUMABLE_THRESHOLD) return uploadFileResumable(parentId, file, overrideName);
 
   const boundary = 'SAREAL_BOUNDARY_20250101';
   const fileBuf  = await file.arrayBuffer();
@@ -1222,7 +1170,6 @@ async function uploadFile(parentId, file, overrideName = null) {
 async function uploadFileResumable(parentId, file, overrideName = null) {
   const metadata = { name: overrideName || file.name, parents: [parentId] };
 
-  // 1) Start resumable session
   const startRes = await fetch(
     `https://www.googleapis.com/upload/drive/v3/files?uploadType=resumable&fields=id,name,webViewLink&supportsAllDrives=true`,
     {
@@ -1245,7 +1192,6 @@ async function uploadFileResumable(parentId, file, overrideName = null) {
   const uploadUrl = startRes.headers.get('Location');
   if (!uploadUrl) throw new Error('Resumable upload URL missing (no Location header).');
 
-  // 2) Upload bytes
   const putRes = await fetch(uploadUrl, {
     method: 'PUT',
     headers: {
@@ -1284,9 +1230,9 @@ async function listChildren(parentId, type = null) {
   return d.files || [];
 }
 
-/* ══════════════════════════════════════════════════
+/* ==========================
    PROGRESS
-══════════════════════════════════════════════════ */
+========================== */
 function setProgress(prefix, pct, label) {
   const wrap = document.getElementById(`${prefix}-progressWrap`);
   const bar  = document.getElementById(`${prefix}-progressBar`);
@@ -1302,9 +1248,9 @@ function setProgress(prefix, pct, label) {
   lbl.textContent = label || '';
 }
 
-/* ══════════════════════════════════════════════════
+/* ==========================
    SUBMIT CHECK-IN
-══════════════════════════════════════════════════ */
+========================== */
 async function submitCheckIn() {
   try {
     const g = (id) => document.getElementById('ci-' + id)?.value?.trim() || '';
@@ -1324,11 +1270,9 @@ async function submitCheckIn() {
     toast('Creating Drive folders…', 'info');
     setProgress('ci', 5, 'Creating studio folder…');
 
-    // 1. Studio folder
     const studioFolderId = await ensureFolder(ROOT_FOLDER_ID, studioName);
     setProgress('ci', 15, 'Creating stay folder…');
 
-    // 2. Stay folder
     const now  = new Date();
     const pad  = n => String(n).padStart(2, '0');
     const stamp = `${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())}_${pad(now.getHours())}-${pad(now.getMinutes())}`;
@@ -1336,13 +1280,11 @@ async function submitCheckIn() {
     const stayFolderId   = await createFolder(studioFolderId, stayFolderName);
     setProgress('ci', 25, 'Creating sub-folders…');
 
-    // 3. Sub-folders
     const imagesId = await createFolder(stayFolderId, '01_Images');
     const videosId = await createFolder(stayFolderId, '02_Videos');
     const docsId   = await createFolder(stayFolderId, '03_Documents');
     setProgress('ci', 35, 'Uploading tenant record…');
 
-    // 4. JSON records
     await uploadJson(stayFolderId, 'tenant_info.json', {
       tenantName, tenantID, tenantPhone, tenantEmail,
       nationality: g('nationality'),
@@ -1358,6 +1300,7 @@ async function submitCheckIn() {
       createdAt: now.toISOString(),
       submittedBy: document.getElementById('authName').textContent
     });
+
     setProgress('ci', 45, 'Uploading checklist…');
 
     await uploadJson(stayFolderId, 'checkin_checklist.json', {
@@ -1365,9 +1308,9 @@ async function submitCheckIn() {
       notes: g('notes'),
       createdAt: now.toISOString()
     });
+
     setProgress('ci', 55, 'Uploading files…');
 
-    // 5. Media uploads
     const files = selectedFiles['ci'];
     let done = 0;
     for (const f of files) {
@@ -1391,9 +1334,9 @@ async function submitCheckIn() {
   }
 }
 
-/* ══════════════════════════════════════════════════
+/* ==========================
    SUBMIT CHECK-OUT
-══════════════════════════════════════════════════ */
+========================== */
 async function submitCheckOut() {
   try {
     const g = (id) => document.getElementById('co-' + id)?.value?.trim() || '';
@@ -1431,6 +1374,7 @@ async function submitCheckOut() {
       createdAt: now.toISOString(),
       submittedBy: document.getElementById('authName').textContent
     });
+
     setProgress('co', 50, 'Uploading checklist…');
 
     await uploadJson(coFolderId, 'checkout_checklist.json', {
@@ -1438,6 +1382,7 @@ async function submitCheckOut() {
       notes: g('notes'),
       createdAt: now.toISOString()
     });
+
     setProgress('co', 60, 'Uploading files…');
 
     const files = selectedFiles['co'];
@@ -1461,9 +1406,9 @@ async function submitCheckOut() {
   }
 }
 
-/* ══════════════════════════════════════════════════
-   BROWSE (Drive Folders)
-══════════════════════════════════════════════════ */
+/* ==========================
+   BROWSE
+========================== */
 async function loadStudiosGeneric(selectId) {
   try {
     requireAuth();
@@ -1559,7 +1504,6 @@ async function loadFilesForBrowse(folderId, cardEl) {
       return;
     }
 
-    // Recurse into sub-folders (one level)
     let rows = [];
     for (const item of allItems) {
       if (item.mimeType === 'application/vnd.google-apps.folder') {
