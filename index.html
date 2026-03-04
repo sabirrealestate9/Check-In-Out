@@ -1229,18 +1229,88 @@ async function ensureFolder(parentId, name) {
 
 async function uploadFile(parentId, file, overrideName = null) {
   const metadata = { name: overrideName || file.name, parents: [parentId] };
+
+  // Use resumable upload for larger files (more reliable)
+  const RESUMABLE_THRESHOLD = 8 * 1024 * 1024; // 8MB
+  if (file.size >= RESUMABLE_THRESHOLD) {
+    return uploadFileResumable(parentId, file, overrideName);
+  }
+
   const boundary = 'SAREAL_BOUNDARY_20250101';
-  const fileBuf  = await file.arrayBuffer();
-  const head = `--${boundary}\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n${JSON.stringify(metadata)}\r\n--${boundary}\r\nContent-Type: ${file.type || 'application/octet-stream'}\r\n\r\n`;
+  const fileBuf = await file.arrayBuffer();
+
+  const head =
+    `--${boundary}\r\n` +
+    `Content-Type: application/json; charset=UTF-8\r\n\r\n` +
+    `${JSON.stringify(metadata)}\r\n` +
+    `--${boundary}\r\n` +
+    `Content-Type: ${file.type || 'application/octet-stream'}\r\n\r\n`;
+
   const tail = `\r\n--${boundary}--`;
-  const blob = new Blob([head, new Uint8Array(fileBuf), tail], { type: `multipart/related; boundary=${boundary}` });
-  const res = await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id,name,webViewLink', {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${accessToken}` },
-    body: blob
-  });
-  if (!res.ok) { const t = await res.text(); throw new Error(`Upload error ${res.status}: ${t}`); }
+
+  const body = new Blob([head, new Uint8Array(fileBuf), tail]);
+
+  const res = await fetch(
+    `https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id,name,webViewLink&supportsAllDrives=true`,
+    {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': `multipart/related; boundary=${boundary}`
+      },
+      body
+    }
+  );
+
+  if (!res.ok) {
+    const t = await res.text();
+    throw new Error(`Upload error ${res.status}: ${t}`);
+  }
   return res.json();
+}
+  async function uploadFileResumable(parentId, file, overrideName = null) {
+  const metadata = { name: overrideName || file.name, parents: [parentId] };
+
+  // 1) Start resumable session
+  const startRes = await fetch(
+    `https://www.googleapis.com/upload/drive/v3/files?uploadType=resumable&fields=id,name,webViewLink&supportsAllDrives=true`,
+    {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json; charset=UTF-8',
+        'X-Upload-Content-Type': file.type || 'application/octet-stream',
+        'X-Upload-Content-Length': String(file.size)
+      },
+      body: JSON.stringify(metadata)
+    }
+  );
+
+  if (!startRes.ok) {
+    const t = await startRes.text();
+    throw new Error(`Resumable start failed ${startRes.status}: ${t}`);
+  }
+
+  const uploadUrl = startRes.headers.get('Location');
+  if (!uploadUrl) throw new Error('Resumable upload URL missing (no Location header).');
+
+  // 2) Upload bytes
+  const putRes = await fetch(uploadUrl, {
+    method: 'PUT',
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      'Content-Type': file.type || 'application/octet-stream',
+      'Content-Length': String(file.size)
+    },
+    body: file
+  });
+
+  if (!putRes.ok) {
+    const t = await putRes.text();
+    throw new Error(`Resumable PUT failed ${putRes.status}: ${t}`);
+  }
+
+  return putRes.json();
 }
 
 async function uploadJson(parentId, filename, data) {
